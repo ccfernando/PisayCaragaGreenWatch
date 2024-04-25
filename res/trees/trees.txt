@@ -3,3 +3,6 @@
 36202,Rosewood,2020,Admin,Infested
 42017,Banaba,2020,Admin,Healthy
 24575,Talisay,2018,Acad 4,Healthy
+56983,Rosewood,2022,Admin,Healthy
+88248,Talisay,2022,Acad 2,Healthy
+97246,PalawanCherry,2020,Admin,Healthy

@@ -113,7 +113,7 @@ public class HomeScreen {
 				loadTreeData();
 
 			} else if (input != null && input.isEmpty()) {
-				
+
 				result = "Tree ID cannot be empty";
 			} else {
 
@@ -149,8 +149,7 @@ public class HomeScreen {
 		currentIDs.clear();
 		try {
 			TextFileLoader loader = new TextFileLoader(Const.TREETEXTFILEPATH);
-			
-			
+
 			String[][] data = loader.getData();
 
 			// check if the textfile is empty

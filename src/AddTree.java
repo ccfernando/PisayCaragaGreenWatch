@@ -95,7 +95,7 @@ public class AddTree extends JFrame {
 		statusLabel.setBounds(91, 250, 45, 13);
 		centerPanel.add(statusLabel);
 
-		// Text fields
+		// adding the Text fields
 		treeID = new JTextField();
 		treeID.setBounds(91, 65, 219, 19);
 		treeID.setColumns(20);
@@ -103,6 +103,8 @@ public class AddTree extends JFrame {
 		treeID.setEditable(false);
 		centerPanel.add(treeID);
 
+		// displaying the dropdown for the common names of the tree
+		// the list is stored in a hash map inside SpeciesConstants.java
 		// Access the SPECIES_MAP from SpeciesConstants class
 		Map<String, String> treeCommonName = SpeciesConstants.SPECIES_MAP;
 
@@ -135,6 +137,7 @@ public class AddTree extends JFrame {
 		centerPanel.add(treeLocation);
 
 		// Create items for the status dropdown
+		// this time, the values are defined inside the String array
 		String[] statusOptions = { "Healthy", "Needs Watering", "Infested", "Diseased" };
 		// Create a JComboBox with the status options
 		statusDropdown = new JComboBox<>(statusOptions);
@@ -142,23 +145,33 @@ public class AddTree extends JFrame {
 
 		centerPanel.add(statusDropdown);
 
+		// adding the ok button
 		addTreeButton = new JButton("OK");
 		addTreeButton.setForeground(Color.WHITE);
 		addTreeButton.setBackground(Const.BLUESMOKE);
 		addTreeButton.addActionListener(e -> {
+			
+			// getting the values of the textfields
 			String treeIDValue = treeID.getText();
 			String treeSpeciesValue = (String) treeNameDropdown.getSelectedItem();
 			String treeDatePlantedValue = treeDatePlanted.getText();
 			String treeLocationValue = treeLocation.getText();
 			String treeStatusValue = (String) statusDropdown.getSelectedItem();
-
+			
+			// check if values are empty
 			if (!treeDatePlantedValue.contentEquals("") || !treeLocationValue.contentEquals("")) {
+				
+				// if not empty, send the value to the writeFile function
 				try {
 					writeFile(treeIDValue, treeSpeciesValue, treeDatePlantedValue, treeLocationValue, treeStatusValue);
+					
+					// update the tree view in the home screen
 					HomeScreen.loadTreeData();
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
+				
+				// close the frame 
 				dispose();
 			} else {
 				JOptionPane.showMessageDialog(this, "Field(s) cannot be empty", "Error", JOptionPane.ERROR_MESSAGE);
@@ -182,6 +195,7 @@ public class AddTree extends JFrame {
 	public static void writeFile(String treeIDValue, String treeSpeciesValue, String treeDatePlantedValue,
 			String treeLocationValue, String treeStatusValue) throws IOException {
 
+		// path is defined inside Const.java
 		File fileObject = new File(Const.TREETEXTFILEPATH);
 		BufferedWriter bWriter = null;
 		if (!fileObject.exists()) {
@@ -197,11 +211,13 @@ public class AddTree extends JFrame {
 		}
 	}
 
+	// function to generate random number with 5 digits
 	public static int uniqueIDGenerator() {
 		int min = 10000;
 		int max = 99999;
 		int newID;
 
+		// loop that will generate a random number and check if it already exists
 		do {
 			newID = (int) (Math.random() * (max - min + 1) + min);
 		} while (currentIDs.contains(newID));

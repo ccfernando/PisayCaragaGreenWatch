@@ -6,47 +6,48 @@ import java.io.IOException;
 import Constants.Const;
 
 public class TextFileLoader {
-    private String[][] data;
+	private String[][] data;
 
-    public TextFileLoader(String filePath) throws IOException {
-        loadData(filePath);
-    }
+	public TextFileLoader(String filePath) throws IOException {
+		loadData(filePath);
+	}
 
-    private void loadData(String filePath) throws IOException {
-    	File fileObject = new File(Const.TREETEXTFILEPATH);
-    	if (!fileObject.exists() &&  (fileObject.createNewFile())){
-			System.out.println("New File Created");	
+	private void loadData(String filePath) throws IOException {
+		File fileObject = new File(Const.TREETEXTFILEPATH);
+		if (!fileObject.exists() && (fileObject.createNewFile())) {
+			System.out.println("New File Created");
 		}
-        BufferedReader reader = new BufferedReader(new FileReader(fileObject));
-        
-        String line;
-        int numRows = 0;
-        int numCols = 0;
+		BufferedReader reader = new BufferedReader(new FileReader(fileObject));
 
-        // Determine number of rows and columns
-        while ((line = reader.readLine()) != null) {
-            numRows++;
-            String[] values = line.split(",");
-            numCols = Math.max(numCols, values.length);
-        }
-        reader.close();
+		String line;
+		int numRows = 0;
+		int numCols = 0;
 
-        // Initialize data array
-        data = new String[numRows][numCols];
+		// Determine number of rows and columns
+		while ((line = reader.readLine()) != null) {
+			numRows++;
+			String[] values = line.split(",");
+			numCols = Math.max(numCols, values.length);
+		}
+		reader.close();
 
-        // Load data into the array
-        reader = new BufferedReader(new FileReader(filePath));
-        int row = 0;
-        while ((line = reader.readLine()) != null) {
-            String[] values = line.split(",");
-            for (int col = 0; col < values.length; col++) {
-                data[row][col] = values[col];
-            }
-            row++;
-        }
-        reader.close();
-    }
+		// Initialize data array
+		data = new String[numRows][numCols];
 
-    public String[][] getData() {
-        return data;
-    }}
+		// Load data into the array
+		reader = new BufferedReader(new FileReader(filePath));
+		int row = 0;
+		while ((line = reader.readLine()) != null) {
+			String[] values = line.split(",");
+			for (int col = 0; col < values.length; col++) {
+				data[row][col] = values[col];
+			}
+			row++;
+		}
+		reader.close();
+	}
+
+	public String[][] getData() {
+		return data;
+	}
+}

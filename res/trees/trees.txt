@@ -1,0 +1,5 @@
+16114,PalawanCherry,2024,Acad 2,Healthy
+78382,Narra,2025,Acad 2,Healthy
+36202,Rosewood,2020,Admin,Infested
+42017,Banaba,2020,Admin,Healthy
+24575,Talisay,2018,Acad 4,Healthy
